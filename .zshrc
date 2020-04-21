@@ -1,15 +1,6 @@
-# https://github.com/vmarchesin/dotfiles
-
 # Global configs
 
-# Source Prezto.
-if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
-  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
-fi
-
 # Environments
-
-eval $(thefuck --alias fuck)
 
 export NVM_DIR="/Users/vinicius.araujo/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
@@ -18,16 +9,17 @@ export NVM_DIR="/Users/vinicius.araujo/.nvm"
 
 alias zshrc="vim ~/.zshrc"
 alias zprofile="vim ~/.zprofile"
-alias ez="exec zsh"
-
-alias g="git"
-alias gc!="gc --amend --no-edit"
-alias gpu="git push --set-upstream origin `git branch | grep '*' | sed 's/^..//'`"
+alias z="exec zsh"
 
 alias sbks="cd ~/Documents/sbks"
 alias vmarchesin="cd ~/Documents/vmarchesin"
 
 # Functions
+gitPushSetUpstream() {
+  git push --set-upstream origin `git branch | grep '*' | sed 's/^..//'`
+}
+alias gpu="gitPushSetUpstream"
+
 deleteAllBranchesAndReset() {
   local TIME=${$(date +"%T")//:/-}
   gbc $TIME
@@ -41,3 +33,4 @@ alias gbda="deleteAllBranchesAndReset"
 # Configs
 
 unsetopt correct
+source ~/.zprofile
